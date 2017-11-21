@@ -8,7 +8,8 @@ class Api::BoxOpenerController < ApplicationController
               logger.debug user.role + " 5"
               str = JSON.generate({ "status" => "approval" , "card_no" => box_opener_params[:card_no] })
           else
-              @rentals = Rental.where("status = ? or status = ?", "approval","lending").where("User_id= ? and rental_date <= ? and due_date >= ? ", user.id, Time.parse("00:00"), Time.parse("00:00"))
+              # @rentals = Rental.where("status = ? or status = ?", "approval","lending").where("User_id= ? and rental_date <= ? and due_date >= ? ", user.id, Time.parse("00:00"), Time.parse("00:00"))
+              @rentals = Rental.where("status = ?", "approval")
               logger.debug user.role + " 5"
               @rentals.each do |rental|
                   str = JSON.generate({ "status" => rental.status, "card_no" => box_opener_params[:card_no], "rack_no" => rental.rack_no })
