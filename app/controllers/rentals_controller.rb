@@ -52,6 +52,7 @@ class RentalsController < ApplicationController
               labware.update(labware_params)
             end
           end
+          @rental.due_date =  @rental.rental_date+7
         elsif @rental.status.eql?("reject") and @@status.eql?("approval") then
           @rental.rental_details.each do |i|
             labwares = Labware.where("name = ?",i.labware.name)
