@@ -62,7 +62,7 @@ gem 'bootstrap_form', '~> 2.3'
 # sudo apt-get install imagemagick libmagickcore-dev libmagickwand-dev
 # rails g uploader image
 gem 'carrierwave'
-gem 'rmagick', require: 'RMagick'
+gem 'rmagick', :require => 'RMagick' 
 
 gem 'cocoon'
 # <== add
