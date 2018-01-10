@@ -3,14 +3,21 @@ class LabwaresController < ApplicationController
   
   before_action :authenticate_user!
   before_action :set_labware, only: [:show, :edit, :update, :destroy]
+  @@labware_group = ""
 
   def index
     if params[:labware_group].blank?
-      @labware_group = "physics"
+      if params[:back]
+        @labware_group = @@labware_group
+      else
+        @labware_group = "physics"
+      end
     else 
       @labware_group = params[:labware_group]
     end
-    @labwares = Labware.where(:code => @labware_group)
+    @@labware_group = @labware_group
+    @q =Labware.where(:code => @labware_group).search(params[:q])
+    @labwares = @q.result()
     @rental_detail = current_rental.rental_details.new
   end
 

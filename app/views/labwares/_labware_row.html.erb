@@ -1,6 +1,12 @@
 <div class="col-md-4">
   <div class="well">
+  <div class="col-md-4">
+  </div>
+  <div class="col-md-4">
   <h2><%= link_to labware.name, labware_path(labware.id) %></h2>
+  </div>
+  <div class="col-md-4">
+  </div>
   <% if can? :create, Rental %>
   <p>
     <%= form_for rental_detail, remote: true do |f| %>

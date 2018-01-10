@@ -18,6 +18,8 @@ class RentalsController < ApplicationController
   def create
     @rental = Rental.new(rental_params)
     @rental.status = "application"
+    logger.debug "55555"
+    logger.debug @rental.rental_date 
     @rental.User = current_user
     if @rental.save
       redirect_to rentals_path
@@ -33,16 +35,20 @@ class RentalsController < ApplicationController
     @@status = @rental.status
     @can_update = islabaware_detail_change(@rental)
     @rental_details = @rental.rental_details
-    logger.debug @rental
+    logger.debug "1234"
   end
 
   def update
+    logger.debug "5678"
     if @rental.User.blank?
       @rental.User = current_user
       @rental.status = "application"
     end
-    logger.debug @@status + " HHH"
+    t = @rental.rental_date
+    logger.debug t
     if @rental.update(rental_params)
+      logger.debug "91011"
+      logger.debug @rental.status + " HHH"
       if can? :change_status, Rental then
         if @rental.status.eql?("approval") and (@@status.eql?("application") or @@status.eql?("reject")) then
           @rental.rental_details.each do |i|
@@ -52,6 +58,9 @@ class RentalsController < ApplicationController
               labware.update(labware_params)
             end
           end
+          @rental.due_date = @rental.rental_date + 10.days
+          logger.debug @rental.due_date
+          @rental.save
         elsif @rental.status.eql?("reject") and @@status.eql?("approval") then
           @rental.rental_details.each do |i|
             labwares = Labware.where("name = ?",i.labware.name)
