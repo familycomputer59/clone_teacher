@@ -65,6 +65,8 @@ gem 'carrierwave'
 gem 'rmagick', :require => 'RMagick' 
 
 gem 'cocoon'
+
+gem 'rails_12factor', group: :production
 # <== add
 
 # seach form package
