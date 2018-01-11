@@ -14,7 +14,7 @@ class Api::BoxOpenerController < ApplicationController
                 logger.debug " 5"
                 if rental.User_id.eql?(user.id) then
                   logger.debug  " 6"
-                  str = JSON.generate({ "status" => rental.status, "card_no" => box_opener_params[:card_no], "rack_no" => rental.rack_no })
+                  str = JSON.generate({ "rack_no" => rental.rack_no })
                   if rental.status.eql?("approval") then
                     logger.debug  " 7"
                     rental.status = "lending"
