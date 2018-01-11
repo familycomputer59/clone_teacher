@@ -6,7 +6,7 @@ gem 'rails', '4.2.5'
 
 gem 'sqlite3', groups: %w(test development), require: false
 
-gem 'pg', groups: %w(production), require: false
+gem 'pg', '~> 0.20.0',  groups: %w(production), require: false
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
